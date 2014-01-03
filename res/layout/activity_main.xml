@@ -8,15 +8,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/contest_button"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/contest_string" />
+
+    <Button
+        android:id="@+id/general_practice_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contest_button"
+        android:text="@string/general_practice_string" />
 
     <orbotix.view.connection.SpheroConnectionView
         android:id="@+id/sphero_connection_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#FFF" />
+        android:background="#FFF" >
+    </orbotix.view.connection.SpheroConnectionView>
     
 </RelativeLayout>

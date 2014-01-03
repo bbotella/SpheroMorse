@@ -1,5 +1,10 @@
-package es.ereadme.sphero.morsetrainer;
+package es.ereadme.sphero.morsetrainer.activities;
 
+import es.ereadme.sphero.morsetrainer.R;
+import es.ereadme.sphero.morsetrainer.R.id;
+import es.ereadme.sphero.morsetrainer.R.layout;
+import es.ereadme.sphero.morsetrainer.R.menu;
+import es.ereadme.sphero.morsetrainer.constants.GlobalObjects;
 import orbotix.robot.base.Robot;
 import orbotix.sphero.ConnectionListener;
 import orbotix.sphero.Sphero;
@@ -20,14 +25,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		mSpheroConnectionView = (SpheroConnectionView) findViewById(R.id.sphero_connection_view);
-        mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
+		GlobalObjects.mSpheroConnectionView = (SpheroConnectionView) findViewById(R.id.sphero_connection_view);
+		GlobalObjects.mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
 
             @Override
             public void onConnected(Robot robot) {
-                mRobot = (Sphero) robot;
+            	GlobalObjects.mRobot = (Sphero) robot;
                 //mRobot.getCollisionControl().addCollisionListener(mCollisionListener);
-                mRobot.getCollisionControl().startDetection(45, 45, 100, 100, 100);
+            	GlobalObjects.mRobot.getCollisionControl().startDetection(45, 45, 100, 100, 100);
             }
 
             @Override
@@ -37,7 +42,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onDisconnected(Robot sphero) {
-                mSpheroConnectionView.startDiscovery();
+            	GlobalObjects.mSpheroConnectionView.startDiscovery();
             }
         });
 	}
