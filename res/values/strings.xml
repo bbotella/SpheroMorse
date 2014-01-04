@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Sphero Morse Trainer</string>
     <string name="action_settings">Settings</string>
     <string name="contest_string">Contest</string>
     <string name="general_practice_string">General Practice</string>
+    <string name="title_activity_contest">Contest</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
