@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import es.ereadme.sphero.morsetrainer.R;
 import es.ereadme.sphero.morsetrainer.constants.GlobalObjects;
+import es.ereadme.sphero.morsetrainer.databases.DictionaryDbHelper;
 
 public class MainActivity extends Activity {
 
@@ -51,6 +52,8 @@ public class MainActivity extends Activity {
             	GlobalObjects.mSpheroConnectionView.startDiscovery();
             }
         });
+		
+		GlobalObjects.dictionariesDB = new DictionaryDbHelper(getApplicationContext());
 	}
 
 	@Override

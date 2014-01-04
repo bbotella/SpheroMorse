@@ -12,9 +12,11 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import es.ereadme.sphero.morsetrainer.R;
 import es.ereadme.sphero.morsetrainer.constants.Constants;
 import es.ereadme.sphero.morsetrainer.interfaces.ILetterListener;
+import es.ereadme.sphero.morsetrainer.morseClasses.WordsDictionary;
 import es.ereadme.sphero.morsetrainer.services.SpheroKeyboardService;
 
 public class ContestActivity extends Activity {
@@ -39,6 +41,9 @@ public class ContestActivity extends Activity {
 				Log.d(Constants.TAG, "New letter detected");
 			}
 		});
+		
+		TextView randomWordTextView = (TextView) findViewById(R.id.random_word_text_view);
+		randomWordTextView.setText(WordsDictionary.getSpanishRandomWord());
 	}
 	
 	public void setNewLetterEventListener(ILetterListener eventListener) {
