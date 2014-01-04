@@ -33,6 +33,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.ereadme.sphero.morsetrainer.activities.MainActivity" />
         </activity>
+        <service android:name="es.ereadme.sphero.morsetrainer.services.SpheroKeyboardService" />
+        
     </application>
 
 </manifest>

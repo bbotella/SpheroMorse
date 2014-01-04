@@ -1,19 +1,21 @@
 package es.ereadme.sphero.morsetrainer.activities;
 
-import orbotix.robot.base.CollisionDetectedAsyncData;
-import orbotix.sphero.CollisionListener;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import es.ereadme.sphero.morsetrainer.R;
 import es.ereadme.sphero.morsetrainer.constants.Constants;
-import es.ereadme.sphero.morsetrainer.constants.GlobalObjects;
 import es.ereadme.sphero.morsetrainer.interfaces.ILetterListener;
+import es.ereadme.sphero.morsetrainer.services.SpheroKeyboardService;
 
 public class ContestActivity extends Activity {
 	ILetterListener mListener;
@@ -24,8 +26,12 @@ public class ContestActivity extends Activity {
 		setContentView(R.layout.activity_contest);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		GlobalObjects.mRobot.getCollisionControl().addCollisionListener(mCollisionListener);
-		GlobalObjects.mRobot.getCollisionControl().startDetection(45, 45, 100, 100, 100);
+		
+		Intent i=new Intent(this, SpheroKeyboardService.class);
+	    
+	    i.putExtra(SpheroKeyboardService.EXTRA_MESSENGER, new Messenger(handler));
+	    startService(i);
+		
 		this.setNewLetterEventListener(new ILetterListener() {
 			@Override
 			public void onNewLetterEvent() {
@@ -66,14 +72,14 @@ public class ContestActivity extends Activity {
 	}
 	
 	
-	private final CollisionListener mCollisionListener = new CollisionListener() {
-        public void collisionDetected(CollisionDetectedAsyncData collisionData) {
-        	Log.d(Constants.TAG, "Collision detected");
-        	//Here comes the code to detect the morse characer. When detected, throw the event
-        	if(mListener!=null) 
+	private Handler handler=new Handler() {
+	    @Override
+	    public void handleMessage(Message msg) {
+	    	Log.d(Constants.TAG, "Message received from service");
+	    	if(mListener!=null) 
         		mListener.onNewLetterEvent();
-        }
-    };
+	    }
+	  };
 	
 
 }
